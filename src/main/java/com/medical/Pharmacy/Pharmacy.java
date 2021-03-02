@@ -2,8 +2,7 @@ package com.medical.Pharmacy;
 
 public class Pharmacy {
 	private int id;
-	private int medicine_id;
-	private int doctor_id;
+	private Medicine medicine;
 	private int quantity;
 	
 	public int getId() {
@@ -12,17 +11,12 @@ public class Pharmacy {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getMedicine_id() {
-		return medicine_id;
+	
+	public Medicine getMedicine() {
+		return medicine;
 	}
-	public void setMedicine_id(int medicine_id) {
-		this.medicine_id = medicine_id;
-	}
-	public int getDoctor_id() {
-		return doctor_id;
-	}
-	public void setDoctor_id(int doctor_id) {
-		this.doctor_id = doctor_id;
+	public void setMedicine(Medicine medicine) {
+		this.medicine = medicine;
 	}
 	public int getQuantity() {
 		return quantity;
@@ -32,8 +26,8 @@ public class Pharmacy {
 	}
 	@Override
 	public String toString() {
-		return "Pharmacy id=" + id + ", medicine_id=" + medicine_id + ", doctor_id=" + doctor_id + ", quantity="
-				+ quantity + "";
+		return "  "+ medicine.getName() +"    "+medicine.getBrand() ;
 	}
+	
 
 }

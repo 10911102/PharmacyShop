@@ -24,7 +24,7 @@ public class Medicine {
 	}
 	@Override
 	public String toString() {
-		return "Medicine id=" + id + ", name=" + name + ", brand=" + brand + ".";
+		return  name + "  " + brand + "";
 	}
 
 }

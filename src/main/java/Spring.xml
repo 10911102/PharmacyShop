@@ -12,5 +12,75 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util.xsd">
 
-	
+	<bean id="medicine1" class="com.medical.Pharmacy.Medicine">
+		<property name="id" value="1"></property>
+		<property name="name" value="paracetamol"></property>
+		<property name="brand" value="cipla"></property>
+	</bean>
+	<bean id="medicine2" class="com.medical.Pharmacy.Medicine">
+		<property name="id" value="2"></property>
+		<property name="name" value="Azithromycin"></property>
+		<property name="brand" value="zydus"></property>
+	</bean>
+	<bean id="pharmacy1" class="com.medical.Pharmacy.Pharmacy">
+		<property name="id" value="1"></property>
+		<property name="medicine" ref="medicine1"></property>
+		<property name="quantity" value="100"></property>
+	</bean>
+	<bean id="pharmacy2" class="com.medical.Pharmacy.Pharmacy">
+		<property name="id" value="2"></property>
+		<property name="medicine" ref="medicine2"></property>
+		<property name="quantity" value="110"></property>
+	</bean>
+	<bean id="shop" class="com.medical.Shop.ShopOperations">
+		<property name="list">
+			<util:list>
+				<ref bean="pharmacy1" />
+				<ref bean="pharmacy2" />
+			</util:list>
+		</property>
+		<property name="placedOrders">
+			<util:list>
+				<ref bean="order1" />
+			</util:list>
+		</property>
+	</bean>
+	<bean id="order1" class="com.medical.Pharmacy.Order">
+		<property name="id" value="1" />
+		<property name="medicine_id" value="2" />
+		<property name="quantity" value="100" />
+		<property name="status" value="NotComplete" />
+	</bean>
+
+	<bean id="doctor1" class="com.medical.Pharmacy.Doctor">
+		<property name="id" value="1"></property>
+		<property name="fName" value="Abdul"></property>
+		<property name="lName" value="Kalam"></property>
+	</bean>
+	<bean id="doctor2" class="com.medical.Pharmacy.Doctor">
+		<property name="id" value="2"></property>
+		<property name="fName" value="Manmohan"></property>
+		<property name="lName" value="Singh"></property>
+	</bean>
+	<bean id="doctorOp" class="com.medical.Shop.DoctorOperations">
+		<property name="doctors">
+			<util:list>
+				<ref bean="doctor1" />
+				<ref bean="doctor2" />
+			</util:list>
+		</property>
+
+	</bean>
+	<bean id="orderOperations"
+		class="com.medical.Shop.OrderOperations"></bean>
+
+	<context:property-placeholder location="classpath:com/medical/Shop/pharmacy.properties"/>
+	<bean id="pharmacyProperties" class="com.medical.Pharmacy.PharmacyProperties" >
+		<property name="name" value="${name}" />
+		<property name="lic_no" value="${lic_no}" />
+		<property name="address" value="${address}" />
+		<property name="contact" value="${contact}" />
+        </bean>  
+
+
 </beans>

@@ -4,7 +4,7 @@ public class Order {
 	private int id;
 	private int medicine_id;
 	private int quantity;
-	private int status;
+	private String status;
 	
 	public int getId() {
 		return id;
@@ -24,15 +24,15 @@ public class Order {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public int getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(int status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	@Override
 	public String toString() {
-		return "Order id=" + id + ", medicine_id=" + medicine_id + ", quantity=" + quantity + ", status=" + status
+		return " medicine_id=" + medicine_id + ", quantity=" + quantity + ", status=" + status
 				+ "";
 	}
 	
