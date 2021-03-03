@@ -7,24 +7,36 @@ import com.medical.Pharmacy.Order;
 import com.medical.Pharmacy.Pharmacy;
 
 
-public class OrderOperations extends ShopOperations {
+public class OrderOperations  {
+	ShopOperations shop;
 	
+	
+	public ShopOperations getShop() {
+		return shop;
+	}
+
+
+	public void setShop(ShopOperations shop) {
+		this.shop = shop;
+	}
+
+
 	/**
 	 * Place order of required medicine in your store from warehouse or distributer
 	 */
 	public void placeOrder() {
 		Order order = new Order();
-		showAllMedicine();
+		shop.showAllMedicine();
 		System.out.println("Enter Medicine_Id to order medicine");
-		int id = sc.nextInt();
-		sc.nextLine();
-		Pharmacy pharmacy = list.get(--id);
+		int id = shop.sc.nextInt();
+		shop.sc.nextLine();
+		Pharmacy pharmacy = ShopOperations.list.get(--id);
 		order.setMedicine_id(pharmacy.getId());
 		System.out.println("Enter Quantity of medicine " + pharmacy.getMedicine().getName() + " to place order");
-		int quantity = sc.nextInt();
+		int quantity = shop.sc.nextInt();
 		order.setQuantity(quantity);
 		order.setStatus("Not received");
-		placedOrders.add(order);
+		ShopOperations.placedOrders.add(order);
 		System.out.println("Order placed " + order);
 	}
 	
@@ -35,12 +47,12 @@ public class OrderOperations extends ShopOperations {
 	 * @param quantity Integer value of medicine required.
 	 * @return Object of order class.
 	 */
-	public static Order placeOrder(Pharmacy pharmacy,int quantity) {
+	public Order placeOrder(Pharmacy pharmacy,int quantity) {
 		Order order = new Order();
 		order.setMedicine_id(pharmacy.getId());
 		order.setQuantity(quantity);
 		order.setStatus("Not Complete");
-		placedOrders.add(order);
+		ShopOperations.placedOrders.add(order);
 		return order;
 	}
 
@@ -50,9 +62,9 @@ public class OrderOperations extends ShopOperations {
 	public void deliveryReport() {
 		System.out.println("Enter order id to change delivery status");
 		showAllOrder();
-		int id = sc.nextInt();
-		Order order = placedOrders.get(id - 1);
-		Pharmacy pharmacy = list.get(order.getMedicine_id() - 1);
+		int id = shop.sc.nextInt();
+		Order order = ShopOperations.placedOrders.get(id - 1);
+		Pharmacy pharmacy = ShopOperations.list.get(order.getMedicine_id() - 1);
 		pharmacy.setQuantity(pharmacy.getQuantity() + order.getQuantity());
 		order.setStatus("Delivered");
 
@@ -62,7 +74,7 @@ public class OrderOperations extends ShopOperations {
 	 * Show All Oreders in store
 	 */
 	public void showAllOrder() {
-		showOrders(placedOrders);
+		showOrders(ShopOperations.placedOrders);
 	}
 
 	/**
@@ -70,7 +82,7 @@ public class OrderOperations extends ShopOperations {
 	 */
 	public void showPendingOrders() {
 		List<Order> orderList=new ArrayList<Order>();
-		for(Order order:placedOrders) {
+		for(Order order:ShopOperations.placedOrders) {
 			if(!order.getStatus().equals("Delivered")){
 				orderList.add(order);
 			}
@@ -86,7 +98,7 @@ public class OrderOperations extends ShopOperations {
 		int count = 1;
 		System.out.println("Order_Id        Medicine_Name       Quantity      Status");
 		for (Order order : orderList) {
-			System.out.println(count++ + "    " + (list.get(order.getMedicine_id() - 1)).getMedicine().getName()
+			System.out.println(count++ + "    " + (ShopOperations.list.get(order.getMedicine_id() - 1)).getMedicine().getName()
 					+ "     " + order.getQuantity() + "    " + order.getStatus());
 		}
 	}

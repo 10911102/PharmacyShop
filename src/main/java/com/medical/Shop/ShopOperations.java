@@ -10,8 +10,9 @@ import com.medical.Pharmacy.Pharmacy;
 public class ShopOperations {
 	protected static List<Pharmacy> list;
 	protected static List<Order> placedOrders;
-
+	private OrderOperations orderOperation;
 	Scanner sc = new Scanner(System.in);
+	
 
 	public List<Pharmacy> getList() {
 		return list;
@@ -93,8 +94,16 @@ public class ShopOperations {
 			System.out.println("Shortage in Stock.Tell to visit again");
 			System.out.println("Enter Quantity of medicine " + pharmacy.getMedicine().getName() + " to place order");
 			quantity = sc.nextInt();
-			OrderOperations.placeOrder(pharmacy, quantity);
+			orderOperation.placeOrder(pharmacy, quantity);
 		}
+	}
+
+	public OrderOperations getOrderOperation() {
+		return orderOperation;
+	}
+
+	public void setOrderOperation(OrderOperations orderOperation) {
+		this.orderOperation = orderOperation;
 	}
 
 }

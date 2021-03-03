@@ -72,9 +72,10 @@
 
 	</bean>
 	<bean id="orderOperations"
-		class="com.medical.Shop.OrderOperations"></bean>
+		class="com.medical.Shop.OrderOperations">
+		<property name="shop" ref="shop"></property></bean>
 
-	<context:property-placeholder location="classpath:com/medical/Shop/pharmacy.properties"/>
+	<context:property-placeholder location="classpath:/pharmacy.properties"/>
 	<bean id="pharmacyProperties" class="com.medical.Pharmacy.PharmacyProperties" >
 		<property name="name" value="${name}" />
 		<property name="lic_no" value="${lic_no}" />
